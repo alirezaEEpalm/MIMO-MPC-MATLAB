@@ -206,9 +206,10 @@ After initialization, `MIMO_sys` contains:
 Dale E. Seborg, Thomas F. Edgar, Duncan A. Mellichamp, Francis J. Doyle III
 ISBN-13: 978-1119285915
 
-**RGA**: Chapter 16 (Multivariable Control)
-**Direct Synthesis**: Chapter 12
-**MPC/DMC**: Chapter 21 (Model Predictive Control)
+**RGA**: Chapter 18 (Multiloop and Multivariable Control)
+**Direct Synthesis**: Chapter 12 (PID Controller Design, Tuning, and
+Troubleshooting)
+**MPC/DMC**: Chapter 20 (Model Predictive Control)
 
 ***
 
