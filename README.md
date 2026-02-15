@@ -35,7 +35,7 @@ MIMO_MPC_Toolbox/
 Given a systems's transfer matrix:
 
 $$G(s) = \begin{bmatrix} 
-\frac{2.6}{1+62s} & \frac{1.5}{(1+23s)(1+62s)} \\[2em] 
+\frac{2.6}{1+62s} & \frac{1.5}{(1+23s)(1+62s)} \\ 
 \frac{1.4}{(1+30s)(1+90s)} & \frac{2.8}{1+90s} 
 \end{bmatrix}$$
 
