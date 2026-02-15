@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # MIMO MPC Toolbox in MATLAB
 
 This repository provides a MATLAB framework for modeling, simulating, and controlling linear **MIMO** systems using **Dynamic Matrix Control (DMC)** and **direct synthesis methods**.[^1]
@@ -34,6 +32,13 @@ MIMO_MPC_Toolbox/
 ***
 
 ## Getting Started (Complete Workflow)
+Given a systems's transfer matrix:
+
+$$G(s) = \begin{bmatrix} 
+\frac{2.6}{1+62s} & \frac{1.5}{(1+23s)(1+62s)} \\[2em] 
+\frac{1.4}{(1+30s)(1+90s)} & \frac{2.8}{1+90s} 
+\end{bmatrix}$$
+
 
 ```matlab
 %% 1. Define MIMO plant
@@ -55,7 +60,7 @@ MIMO_sys.staticRGA_analysis();
 % Output 1 ↔ Input 1 (RGA=1.41), Output 2 ↔ Input 2 (RGA=1.41)
 
 %% 4. Direct synthesis controller design
-control1.model = "FO"; control1.tau = 20; control1.zeta = NaN; control1.wn = NaN; control1.theta = NaN;
+control1.model = "SOPTD"; control1.tau = NaN; control1.zeta = 0.8; control1.wn = 0.05; control1.theta = 5;
 control2.model = "FO"; control2.tau = 15; control2.zeta = NaN; control2.wn = NaN; control2.theta = NaN;
 desiredCL = [control1, control2];
 MIMO_sys = MIMO_sys.DirectSynthesis(desiredCL);
@@ -91,6 +96,15 @@ noise = 0.01 * randn(numel(t), num_out);
 MIMO_sys.MPCplot(t, index, Y, Ym, yRef, U, dU, disturbance, noise);
 ```
 
+## Simulation Results
+### Multiloop design with direct synthesis
+
+![Multiloop design with direct synthesis](Figures/Direct_Synth.png)
+---
+### Multivariable MPC design with DMC method
+
+![Multivariable MPC design with DMC method](Figures/DMC.png)
+
 
 ***
 
@@ -120,8 +134,16 @@ Uses `sisoDesign()` internally per paired channel.
 
 ### 3. **DMC MPC**
 
-Step-response model, quadratic cost $J = \|y-r\|_Q^2 + \|\Delta u\|_R^2$, explicit gain:
-$K_c = (S^\top Q S + R)^{-1} S^\top Q$
+Step-response model, quadratic cost
+$$
+J = \sum_{i=1}^{P} \| \hat{y}(k+i|k) - r(k+i) \|_Q^2 + 
+\sum_{j=1}^{M} \| \Delta u(k+j|k) \|_R^2,
+$$
+
+explicit gain:
+$$
+K_c = (S^\top Q S + R)^{-1} S^\top Q
+$$
 
 ### 4. **Reference Generator**
 
@@ -191,7 +213,9 @@ ISBN-13: 978-1119285915
 ## 👤 Author
 
 **Alireza Esmailnezhad**
+
 Control Systems Engineer
+
 Tehran - Iran
 
 <div align="center">⁂</div>
