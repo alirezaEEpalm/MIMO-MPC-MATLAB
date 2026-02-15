@@ -135,12 +135,14 @@ Uses `sisoDesign()` internally per paired channel.
 ### 3. **DMC MPC**
 
 Step-response model, quadratic cost
+
 $$
 J = \sum_{i=1}^{P} \| \hat{y}(k+i|k) - r(k+i) \|_Q^2 + 
 \sum_{j=1}^{M} \| \Delta u(k+j|k) \|_R^2,
 $$
 
 explicit gain:
+
 $$
 K_c = (S^\top Q S + R)^{-1} S^\top Q
 $$
